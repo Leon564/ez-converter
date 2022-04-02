@@ -11,8 +11,10 @@ const imageToBuffer = async (url) => {
 };
 
 const loadfile = async (file, type, source_format) => {
-  if (validator.isURL(file)) file = await imageToBuffer(file);
-  file = Buffer.isBuffer(file) ? file : fs.readFileSync(file);
+  if (!Buffer.isBuffer(file)) {
+    if (validator.isURL(file)) file = await imageToBuffer(file);
+    else file = fs.readFileSync(file);
+  }
   let data = new formData();
   data.append("new-image", file, `image.${source_format}`);
   let result = await axios({
