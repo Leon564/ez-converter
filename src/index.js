@@ -60,85 +60,80 @@ const ezgif = async (buffer, type, options) => {
   let data = await optionProcess(cResultData, options);
   return imageToBuffer(data);
 };
-const optionsVars = {
-  start: null,
-  end: null,
-  percentage: null,
-  background: null,
-  size: null,
-  fps: null,
-  method: null,
-  diff: null,
-};
+
+const optionsBuilder = (format, optionsVars) => ({
+  source_format: format,
+  start: 0,
+  end: 100,
+  quality: 100,
+  background: "#ffffff",
+  size: "original",
+  fps: 10,
+  method: "ffmpeg",
+  diff: "off",
+  ...optionsVars,
+});
+
 module.exports = {
-  webp_to_mp4: (
-    file,
-    options = {
-      source_format: "webp",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "webp-to-mp4", options),
-  video_to_webp: (
-    file,
-    options = {
-      source_format: "mp4",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "video-to-webp", options),
-  video_to_gif: (
-    file,
-    options = {
-      source_format: "mp4",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "video-to-gif", options),
-  gif_to_mp4: (
-    file,
-    options = {
-      source_format: "gif",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "gif-to-mp4", options),
-  gif_to_webp: (
-    file,
-    options = {
-      source_format: "gif",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "gif-to-webp", options),
-  jpg_to_webp: (
-    file,
-    options = {
-      source_format: "jpg",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "jpg-to-webp", options),
-  png_to_webp: (
-    file,
-    options = {
-      source_format: "png",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "png-to-webp", options),
-  webp_to_png: (
-    file,
-    options = {
-      source_format: "webp",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "webp-to-png", options),
-  webp_to_jpg: (
-    file,
-    options = {
-      source_format: "webp",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "webp-to-jpg", options),
-  webp_to_gif: (
-    file,
-    options = {
-      source_format: "webp",
-      ...optionsVars,
-    }
-  ) => ezgif(file, "webp-to-gif", options),
+  video_to_webp: (file, options = optionsBuilder("mp4")) =>
+    ezgif(
+      file,
+      "video-to-webp",
+      optionsBuilder(options.source_format || "mp4", options)
+    ),
+
+  video_to_gif: (file, options = optionsBuilder("mp4")) =>
+    ezgif(
+      file,
+      "video-to-gif",
+      optionsBuilder(options.source_format || "mp4", options)
+    ),
+  gif_to_mp4: (file, options = optionsBuilder("gif")) =>
+    ezgif(
+      file,
+      "gif-to-mp4",
+      optionsBuilder(options.source_format || "gif", options)
+    ),
+  gif_to_webp: (file, options = optionsBuilder("gif")) =>
+    ezgif(
+      file,
+      "gif-to-webp",
+      optionsBuilder(options.source_format || "gif", options)
+    ),
+  jpg_to_webp: (file, options = optionsBuilder("jpg")) =>
+    ezgif(
+      file,
+      "jpg-to-webp",
+      optionsBuilder(options.source_format || "jpg", options)
+    ),
+  png_to_webp: (file, options = optionsBuilder("png")) =>
+    ezgif(
+      file,
+      "png-to-webp",
+      optionsBuilder(options.source_format || "png", options)
+    ),
+  webp_to_png: (file, options = optionsBuilder("webp")) =>
+    ezgif(
+      file,
+      "webp-to-png",
+      optionsBuilder(options.source_format || "webp", options)
+    ),
+  webp_to_jpg: (file, options = optionsBuilder("webp")) =>
+    ezgif(
+      file,
+      "webp-to-jpg",
+      optionsBuilder(options.source_format || "webp", options)
+    ),
+  webp_to_gif: (file, options = optionsBuilder("webp")) =>
+    ezgif(
+      file,
+      "webp-to-gif",
+      optionsBuilder(options.source_format || "webp", options)
+    ),
+  webp_to_mp4: (file, options = optionsBuilder("webp")) =>
+    ezgif(
+      file,
+      "webp-to-mp4",
+      optionsBuilder(options.source_format || "webp", options)
+    ),
 };
