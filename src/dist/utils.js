@@ -11,6 +11,12 @@ const getFileType = async (data) => {
   return type;
 };
 
+const urlFileToBuffer = async (url) => {
+  let file = await axios.get(url, { responseType: "arraybuffer" });
+  return Buffer.from(file.data, "utf-8");
+};
+
 module.exports = {
   getFileType,
+  urlFileToBuffer,
 };
