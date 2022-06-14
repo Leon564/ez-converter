@@ -50,7 +50,7 @@ class Converter {
   async build() {
     if (!this.targetFormat) throw new Error("Target format is not set");
     if (!this.file) throw new Error("File is not set");
-    let options = {
+    this.result = await converter({
       file: this.file,
       targetFormat: this.targetFormat,
       startTime: this.startTime || 0,
@@ -62,14 +62,12 @@ class Converter {
       method: this.method || "ffmpeg",
       diff: this.diff || "off",
       loop: this.loop || true,
-    };
-    let result = await converter(options);
-    this.result = result;
+    });
     return this;
   }
 
   async toBuffer() {
-    this.result ?? (await this.build());
+    this.result || (await this.build());
     return this.result;
   }
 
@@ -79,7 +77,7 @@ class Converter {
 
   toFile = async (path) => {
     if (!this.result) await this.build();
-    if (!path) path = this.defaultFilename();
+    const pathName = path || this.defaultFilename();
     return writeFile(path, this.result);
   };
 }

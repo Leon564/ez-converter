@@ -5,11 +5,11 @@ const mediaToBuffer = require("./mediaToBuffer");
 
 const converter = async (options) => {
   options.file = await mediaToBuffer(options);
-  const mime = await getFileType(options.file);
-  options.sourceFormat = mime.mime.includes("video") ? "video" : mime.ext;
-  options.fileExt = mime.ext;
+  const {mime,ext} = await getFileType(options.file);
+  options.sourceFormat = mime.includes("video") ? "video" : ext;
+  options.fileExt = ext;
   options.newUrl = await loadFile(options);
-  let data = await processFile(options);
+  const data = await processFile(options);
   return urlFileToBuffer(data);
 };
 module.exports = converter;
