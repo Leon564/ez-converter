@@ -1,7 +1,7 @@
-const axios = require("axios");
+import axios from "axios";
+import { fileTypeFromBuffer, fileTypeFromFile } from "file-type";
 
 const getFileType = async (data) => {
-  const { fileTypeFromBuffer, fileTypeFromFile } = await import("file-type");
   const type = Buffer.isBuffer(data)
     ? await fileTypeFromBuffer(data)
     : await fileTypeFromFile(data);
@@ -15,7 +15,4 @@ const urlFileToBuffer = async (url) => {
   return Buffer.from(file.data, "utf-8");
 };
 
-module.exports = {
-  getFileType,
-  urlFileToBuffer,
-};
+export { getFileType, urlFileToBuffer };
