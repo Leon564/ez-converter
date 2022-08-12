@@ -1,4 +1,4 @@
-module.exports = {
+export const Formats = {
   WEBP: "webp",
   GIF: "gif",
   MP4: "mp4",

@@ -1,6 +1,7 @@
-const converter = require("./converter");
-const { writeFile } = require("fs-extra");
-class Converter {
+import converter from "./converter.js";
+import fs from "fs-extra";
+
+export class Converter {
   constructor(file) {
     this.file = file;
   }
@@ -78,7 +79,6 @@ class Converter {
   toFile = async (path) => {
     if (!this.result) await this.build();
     const pathName = path || this.defaultFilename();
-    return writeFile(path, this.result);
+    return fs.writeFile(path, this.result);
   };
 }
-module.exports = Converter;

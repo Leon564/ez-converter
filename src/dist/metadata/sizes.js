@@ -1,4 +1,4 @@
-module.exports = {
+export const Sizes = {
   ORIGINAL: "original",
   P600XAUTO: "600",
   P500XAUTO: "500",

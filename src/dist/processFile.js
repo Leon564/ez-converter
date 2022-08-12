@@ -1,6 +1,6 @@
-const formData = require("form-data");
-const axios = require("axios");
-const cheerio = require("cheerio");
+import formData from "form-data";
+import cheerio from "cheerio";
+import axios from "axios";
 
 const processFile = async (options) => {
   const data = new formData();
@@ -22,7 +22,7 @@ const processFile = async (options) => {
     method: "POST",
     url: newUrl,
     data: data,
-    headers: data.getHeaders(), 
+    headers: data.getHeaders(),
   });
   const cLoad = cheerio.load(processOptions.data);
   const output = cLoad("div#output").html();
@@ -32,4 +32,4 @@ const processFile = async (options) => {
   return cOutput("a[class=save]").attr("href");
 };
 
-module.exports = processFile;
+export default processFile;

@@ -1,13 +1,13 @@
-const { urlFileToBuffer } = require("./utils");
-const validator = require("validator");
-const { readFileSync } = require("fs-extra");
+import { urlFileToBuffer } from "./utils.js";
+import fs from "fs-extra";
+import validator from "validator";
 
 const MediaToBuffer = async (options) => {
-  let {file} = options;
+  let { file } = options;
   if (!Buffer.isBuffer(file)) {
     if (validator.isURL(file)) file = await urlFileToBuffer(file);
-    else file = readFileSync(file);
+    else file = fs.readFileSync(file);
   }
   return file;
 };
-module.exports = MediaToBuffer;
+export default MediaToBuffer;
