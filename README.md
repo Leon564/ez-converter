@@ -25,7 +25,7 @@ await new Convert("file.mp4") //input
   .toFile("fileConverted.gif"); //Set the output file
 
 //convert mp4 to webp buffer
-let convert = await new Convert("video.mp4")
+const convert = await new Convert("video.mp4")
   .setTargetFormat(Formats.WEBP)
   .setEndTime(10)
   .setDiff("off")
@@ -33,7 +33,7 @@ let convert = await new Convert("video.mp4")
   .setFps(10)
   .setSize(sizes.P500XAUTO)
   .toBuffer();
-  
+
 ```
 
 ***
