@@ -10,7 +10,6 @@
   "author": "Leon564",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
     "build": "tsc -p .",
     "postinstall": "tsc -p ."
   },
@@ -26,7 +25,6 @@
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.11.18",
     "@types/validator": "^13.7.11",
-    "rimraf": "^4.1.2",
     "typescript": "^4.9.5"
   }
 }
