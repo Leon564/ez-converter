@@ -1,10 +1,10 @@
 {
   "name": "ezgif-converter",
-  "version": "3.0.0",
-  "main": "dist",
-  "types": "dist",
+  "version": "3.0.1",
+  "main": "src",
+  "types": "src",
   "files": [
-    "dist"
+    "src"
   ],
   "repository": "https://github.com/Leon564/ezgif-converter",
   "author": "Leon564",

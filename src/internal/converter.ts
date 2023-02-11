@@ -18,7 +18,8 @@ const converter = async (options: IOptions) => {
 
   const processResult = await processFile({ url, ...options })
 
-  return downloadFile(processResult!)
+  //return downloadFile(processResult!)
+  return processResult
 }
 
 export default converter

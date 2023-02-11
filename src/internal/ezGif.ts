@@ -4,10 +4,12 @@ import { IOptions } from '../interfaces/types'
 import { Formats } from '../metadata/formats'
 import { ConvertionMethod } from '../metadata/convertionMethods'
 import { Sizes } from '../metadata/sizes'
+import downloadFile from '../tools/downloadFile'
 
 export class ezGif {
   private Metadata: IOptions
-  private result: Buffer | undefined
+  private result: string | undefined
+
   constructor (private file: string | Buffer) {
     const defaultOptions: IOptions = {
       targetFormat: 'gif',
@@ -74,9 +76,20 @@ export class ezGif {
     return this
   }
 
-  public async toBuffer () {
-    if (!this.result) await this.build()
-    return this.result
+  public async getURL (): Promise<string> {
+    if (!this.result)
+      await this.build().catch(err => {
+        throw err
+      })
+    return this.result!
+  }
+
+  public async toBuffer (): Promise<Buffer> {
+    if (!this.result)
+      await this.build().catch(err => {
+        throw err
+      })
+    return downloadFile(this.result!)
   }
 
   private defaultFileName () {
@@ -87,8 +100,12 @@ export class ezGif {
     }`
   }
 
-  public async toFile (path?: string) {
-    if (!this.result) await this.build()
-    return writeFile(path || this.defaultFileName(), this.result!)
+  public async toFile (path?: string): Promise<void> {
+    if (!this.result)
+      await this.build().catch(err => {
+        throw err
+      })
+    const buffer = await downloadFile(this.result!)
+    return writeFile(path || this.defaultFileName(), buffer)
   }
 }
