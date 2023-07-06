@@ -1,12 +1,12 @@
 {
-  "name": "ezgif-converter",
+  "name": "ez-converter",
   "version": "3.0.1",
   "main": "dist",
   "types": "dist",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/Leon564/ezgif-converter.git",
+  "repository": "https://github.com/Leon564/ez-converter.git",
   "author": "Leon564",
   "license": "MIT",
   "scripts": {
